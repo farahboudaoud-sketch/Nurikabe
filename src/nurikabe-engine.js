@@ -502,6 +502,26 @@ if (typeof module !== 'undefined') module.exports = NuriEngine;
     if (!found) for (let i = 0; i < B.N; i++) if (!B.clueAt[i] && !s.sol[i] && s.x[i] !== 1) { found = { i, val: 0, focus: i, text: 'Déduction avancée : cette case est de la mer.' }; break; }
     return found;
   }
+  const FIGS = (() => {
+    const s = 18;
+    const draw = (W, H, g, bad) => {   // g: rows of chars : '#' mer, 'o' terre, chiffre = île
+      let o = '';
+      g.forEach((row, r) => [...row].forEach((ch, c) => { if (ch === '#') o += `<rect class="${bad && bad.includes(r * W + c) ? 'fr' : 'fi'}" x="${c * s + 1}" y="${r * s + 1}" width="${s - 2}" height="${s - 2}" rx="2" style="fill-opacity:.85"/>`; }));
+      o += figGrid(W, H, s);
+      g.forEach((row, r) => [...row].forEach((ch, c) => {
+        if (/[0-9]/.test(ch)) o += `<circle cx="${c * s + s / 2}" cy="${r * s + s / 2}" r="7" style="fill:var(--navy2);stroke:var(--ink);stroke-width:1.5"/>` + figNum(c * s + s / 2, r * s + s / 2, ch, '', 10);
+        else if (ch === 'o') o += `<circle cx="${c * s + s / 2}" cy="${r * s + s / 2}" r="2" class="fi" style="fill:var(--ink2)"/>`;
+      }));
+      return o;
+    };
+    const f1 = draw(4, 4, ['2o#1', '####', '#3o#', '##o#']);
+    const f2 = draw(4, 4, ['1###', '#o##', '#2##', '####'], [2, 3, 6, 7]);
+    const f3 = draw(4, 3, ['2o##', '#1##', '####'], []) + `<rect class="frs" x="${s * .1}" y="${s * .1}" width="${s * 2.8}" height="${s * 1.8}" rx="4"/>`;
+    return figFigs(
+      ruleFig(f1, 4 * s, 4 * s, 'Chaque île a la taille de son nombre, et toute la mer est reliée.', 'ok'),
+      ruleFig(f2, 4 * s, 4 * s, 'Un carré 2×2 de mer.', 'no'),
+      ruleFig(f3, 4 * s, 3 * s, 'Deux îles qui se touchent par un côté.', 'no'));
+  })();
   registerGame({
     id: 'nurikabe', name: 'Nurikabe', kanji: '塗', winText: 'Mer et îles tracées',
     levels: LV, customLevel, customDefault: { W: 8, H: 8, hard: false }, customRange: { W: [5, 9], H: [5, 9] },
@@ -510,7 +530,7 @@ if (typeof module !== 'undefined') module.exports = NuriEngine;
       <li>Chaque nombre est une <b>île</b> : il donne le nombre de cases de terre de cette île (le nombre compris).</li>
       <li>Chaque île contient <b>un seul nombre</b>, et deux îles ne se touchent jamais par un côté.</li>
       <li>Toutes les autres cases sont de la <b>mer</b>, qui forme <b>un seul bloc</b> relié.</li>
-      <li>La mer ne contient <b>aucun carré 2×2</b>.</li></ul>
+      <li>La mer ne contient <b>aucun carré 2×2</b>.</li></ul>${FIGS}
       <h3>Commandes</h3><ul>
       <li>Touche une case : <b>mer</b>, puis <b>terre</b> (·), puis vide.</li>
       <li>Glisse le doigt pour peindre plusieurs cases de la même façon.</li></ul>`,

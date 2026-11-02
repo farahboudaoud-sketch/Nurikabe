@@ -14,6 +14,22 @@ let G = null;              // current game module
 let st = null;             // current game state (saved)
 let inGame = false, undo = [], hint = null, flashWrong = null, won = false, fresh = null;
 
+
+// ---------- small illustrations for the rules ----------
+function ruleFig(inner, vw, vh, caption, mark, wide) {
+  const tag = mark === 'ok' ? '<b class="rk ok">Correct</b>' : mark === 'no' ? '<b class="rk no">Interdit</b>' : '';
+  return `<figure class="rfig${wide ? ' wide' : ''}"><svg viewBox="0 0 ${vw} ${vh}" aria-hidden="true">${inner}</svg><figcaption>${tag}${caption}</figcaption></figure>`;
+}
+function figGrid(W, H, s, x0, y0, bold) {
+  x0 = x0 || 0; y0 = y0 || 0;
+  let o = '';
+  for (let r = 0; r <= H; r++) o += `<line class="${bold && bold(r, 'r') ? 'fb' : 'fl'}" x1="${x0}" y1="${y0 + r * s}" x2="${x0 + W * s}" y2="${y0 + r * s}"/>`;
+  for (let c = 0; c <= W; c++) o += `<line class="${bold && bold(c, 'c') ? 'fb' : 'fl'}" x1="${x0 + c * s}" y1="${y0}" x2="${x0 + c * s}" y2="${y0 + H * s}"/>`;
+  return o;
+}
+const figNum = (x, y, n, cls, size) => `<text class="ft ${cls || ''}" x="${x}" y="${y + (size || 14) * 0.36}" style="font-size:${size || 14}px">${n}</text>`;
+const figFigs = (...f) => `<div class="rfigs">${f.join('')}</div>`;
+
 function fmt(ms) {
   const s = Math.floor(ms / 1000);
   return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');

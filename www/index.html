@@ -47,6 +47,7 @@ h1{margin:0;font-size:19px;font-weight:600;letter-spacing:.18em;line-height:1.1}
 .gl.b{stroke:var(--ink2);stroke-width:2.6}
 #pad{flex-shrink:0}
 body.arcade .actions{display:none}
+body.arcade #rulesCommon{display:none}
 body.arcade #win{background:var(--veil)}
 body.nohints #hintBtn,body.nohints #verifyBtn,body.nohints .stats .hc{display:none}
 #hintBox{display:none;margin-top:6px;min-height:0;border-left:3px solid var(--red);background:var(--tint);padding:7px 10px;border-radius:0 6px 6px 0;font-size:13.5px;line-height:1.45;align-items:center;gap:10px;justify-content:space-between;flex-shrink:0}
@@ -106,12 +107,34 @@ body.nohints #hintBtn,body.nohints #verifyBtn,body.nohints .stats .hc{display:no
 #winRecord{color:var(--red2)!important}
 #loading{position:absolute;inset:0;display:none;place-items:center;color:var(--ink2);font-size:14px;letter-spacing:.1em;background:var(--navy2);z-index:3}
 #loading.on{display:grid}
-#rules{position:fixed;inset:0;z-index:10;background:var(--veil2);display:none;overflow:auto;padding:calc(20px + env(safe-area-inset-top)) 20px 20px}
+#rules{position:fixed;inset:0;z-index:10;background:var(--navy2);display:none;overflow:auto;padding:calc(20px + env(safe-area-inset-top)) 20px 20px}
 #rules.on{display:block}
 .rulescard{max-width:560px;margin:0 auto;font-size:14.5px;line-height:1.65;color:var(--ink2)}
 .rulescard h3{margin:14px 0 6px;color:var(--ink);font-weight:600;font-size:17px}
 .rulescard ul{margin:0;padding-left:18px}
 .rulescard b{color:var(--ink)}
+.rfigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0 6px}
+.rfig{margin:0;border:1px solid var(--ink3);border-radius:8px;padding:10px 8px 8px;text-align:center;background:var(--tint)}
+.rfig.wide{grid-column:1/-1}
+.rfig.wide svg{max-height:60px}
+.rfig svg{width:100%;height:auto;max-height:130px;display:block;margin:0 auto 6px;overflow:visible}
+.rfig figcaption{font-size:12.5px;line-height:1.4;color:var(--ink2)}
+.rk{display:inline-block;font-size:11px;letter-spacing:.06em;margin-right:5px;padding:1px 6px;border-radius:3px}
+.rk.ok{background:var(--ink);color:var(--navy2)}
+.rk.no{background:var(--red);color:var(--paper)}
+.rfig .fl{stroke:var(--ink3);stroke-width:1}
+.rfig .fb{stroke:var(--ink2);stroke-width:2}
+.rfig .fi{fill:var(--ink)}
+.rfig .fn{fill:var(--navy2)}
+.rfig .fh{fill:var(--ink);fill-opacity:.13}
+.rfig .fr{fill:var(--red2)}
+.rfig .frs{stroke:var(--red2);fill:none;stroke-width:2.5}
+.rfig .fs{stroke:var(--ink);fill:none;stroke-width:2.2;stroke-linecap:round}
+.rfig .fd{stroke:var(--ink2);fill:none;stroke-width:1.5;stroke-dasharray:3 3}
+.rfig .ft{fill:var(--ink);font-family:'Chiffres',sans-serif;font-weight:700;text-anchor:middle}
+.rfig .ft.n{fill:var(--navy2)}
+.rfig .ft.r{fill:var(--red2)}
+.rfig .ft.m{fill:var(--ink2)}
 #intro{position:fixed;inset:0;z-index:20;background:var(--navy2);display:grid;place-items:center;transition:opacity .6s ease}
 #intro.out{opacity:0;pointer-events:none}
 #intro svg{width:min(70vw,300px);height:auto;overflow:visible}
@@ -204,12 +227,12 @@ body.nohints #hintBtn,body.nohints #verifyBtn,body.nohints .stats .hc{display:no
 </div>
 <div id="rules"><div class="rulescard">
   <div id="rulesBody"></div>
-  <h3>Commandes communes</h3>
+  <div id="rulesCommon"><h3>Commandes communes</h3>
   <ul>
     <li><b>Zoom</b> : pince à deux doigts (ou molette de la souris).</li>
     <li>L'<b>indice</b> se précise à chaque appui : une zone, puis l'endroit, puis la déduction expliquée.</li>
     <li>Le bouton ‹ ramène au choix du niveau, ta partie est gardée. 明 / 暗 passe en mode clair ou sombre.</li>
-  </ul>
+  </ul></div>
   <p style="text-align:center;margin-top:18px"><button class="small" id="rulesClose">Fermer</button></p>
 </div></div>
 <script>
@@ -228,6 +251,22 @@ const dims = s => (G.dims ? G.dims(s) : { cols: s.W, rows: s.H, ox: 0, oy: 0 });
 let G = null;              // current game module
 let st = null;             // current game state (saved)
 let inGame = false, undo = [], hint = null, flashWrong = null, won = false, fresh = null;
+
+
+// ---------- small illustrations for the rules ----------
+function ruleFig(inner, vw, vh, caption, mark, wide) {
+  const tag = mark === 'ok' ? '<b class="rk ok">Correct</b>' : mark === 'no' ? '<b class="rk no">Interdit</b>' : '';
+  return `<figure class="rfig${wide ? ' wide' : ''}"><svg viewBox="0 0 ${vw} ${vh}" aria-hidden="true">${inner}</svg><figcaption>${tag}${caption}</figcaption></figure>`;
+}
+function figGrid(W, H, s, x0, y0, bold) {
+  x0 = x0 || 0; y0 = y0 || 0;
+  let o = '';
+  for (let r = 0; r <= H; r++) o += `<line class="${bold && bold(r, 'r') ? 'fb' : 'fl'}" x1="${x0}" y1="${y0 + r * s}" x2="${x0 + W * s}" y2="${y0 + r * s}"/>`;
+  for (let c = 0; c <= W; c++) o += `<line class="${bold && bold(c, 'c') ? 'fb' : 'fl'}" x1="${x0 + c * s}" y1="${y0}" x2="${x0 + c * s}" y2="${y0 + H * s}"/>`;
+  return o;
+}
+const figNum = (x, y, n, cls, size) => `<text class="ft ${cls || ''}" x="${x}" y="${y + (size || 14) * 0.36}" style="font-size:${size || 14}px">${n}</text>`;
+const figFigs = (...f) => `<div class="rfigs">${f.join('')}</div>`;
 
 function fmt(ms) {
   const s = Math.floor(ms / 1000);
@@ -1144,6 +1183,26 @@ if (typeof module !== 'undefined') module.exports = NuriEngine;
     if (!found) for (let i = 0; i < B.N; i++) if (!B.clueAt[i] && !s.sol[i] && s.x[i] !== 1) { found = { i, val: 0, focus: i, text: 'Déduction avancée : cette case est de la mer.' }; break; }
     return found;
   }
+  const FIGS = (() => {
+    const s = 18;
+    const draw = (W, H, g, bad) => {   // g: rows of chars : '#' mer, 'o' terre, chiffre = île
+      let o = '';
+      g.forEach((row, r) => [...row].forEach((ch, c) => { if (ch === '#') o += `<rect class="${bad && bad.includes(r * W + c) ? 'fr' : 'fi'}" x="${c * s + 1}" y="${r * s + 1}" width="${s - 2}" height="${s - 2}" rx="2" style="fill-opacity:.85"/>`; }));
+      o += figGrid(W, H, s);
+      g.forEach((row, r) => [...row].forEach((ch, c) => {
+        if (/[0-9]/.test(ch)) o += `<circle cx="${c * s + s / 2}" cy="${r * s + s / 2}" r="7" style="fill:var(--navy2);stroke:var(--ink);stroke-width:1.5"/>` + figNum(c * s + s / 2, r * s + s / 2, ch, '', 10);
+        else if (ch === 'o') o += `<circle cx="${c * s + s / 2}" cy="${r * s + s / 2}" r="2" class="fi" style="fill:var(--ink2)"/>`;
+      }));
+      return o;
+    };
+    const f1 = draw(4, 4, ['2o#1', '####', '#3o#', '##o#']);
+    const f2 = draw(4, 4, ['1###', '#o##', '#2##', '####'], [2, 3, 6, 7]);
+    const f3 = draw(4, 3, ['2o##', '#1##', '####'], []) + `<rect class="frs" x="${s * .1}" y="${s * .1}" width="${s * 2.8}" height="${s * 1.8}" rx="4"/>`;
+    return figFigs(
+      ruleFig(f1, 4 * s, 4 * s, 'Chaque île a la taille de son nombre, et toute la mer est reliée.', 'ok'),
+      ruleFig(f2, 4 * s, 4 * s, 'Un carré 2×2 de mer.', 'no'),
+      ruleFig(f3, 4 * s, 3 * s, 'Deux îles qui se touchent par un côté.', 'no'));
+  })();
   registerGame({
     id: 'nurikabe', name: 'Nurikabe', kanji: '塗', winText: 'Mer et îles tracées',
     levels: LV, customLevel, customDefault: { W: 8, H: 8, hard: false }, customRange: { W: [5, 9], H: [5, 9] },
@@ -1152,7 +1211,7 @@ if (typeof module !== 'undefined') module.exports = NuriEngine;
       <li>Chaque nombre est une <b>île</b> : il donne le nombre de cases de terre de cette île (le nombre compris).</li>
       <li>Chaque île contient <b>un seul nombre</b>, et deux îles ne se touchent jamais par un côté.</li>
       <li>Toutes les autres cases sont de la <b>mer</b>, qui forme <b>un seul bloc</b> relié.</li>
-      <li>La mer ne contient <b>aucun carré 2×2</b>.</li></ul>
+      <li>La mer ne contient <b>aucun carré 2×2</b>.</li></ul>${FIGS}
       <h3>Commandes</h3><ul>
       <li>Touche une case : <b>mer</b>, puis <b>terre</b> (·), puis vide.</li>
       <li>Glisse le doigt pour peindre plusieurs cases de la même façon.</li></ul>`,
