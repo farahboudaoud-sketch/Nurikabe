@@ -1,0 +1,9 @@
+.nk-sea{fill:var(--ink);fill-opacity:.82}
+.nk-sea.bad{fill:var(--red2);fill-opacity:1}
+.nk-isl circle{fill:var(--navy2);stroke:var(--ink);stroke-width:2.4}
+.nk-isl text{fill:var(--ink);font-family:'Chiffres',sans-serif;font-size:26px;font-weight:700;text-anchor:middle}
+.nk-isl.full circle{fill:var(--ink)}
+.nk-isl.full text{fill:var(--navy2)}
+.nk-dot{fill:var(--ink2)}
+.nk-dot.bad{fill:var(--red2)}
+.nk-ghost{fill:none;stroke:var(--red2);stroke-width:4;stroke-dasharray:6 5;animation:breathe 1.3s ease-in-out infinite}

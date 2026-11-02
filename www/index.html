@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Nurikabe 塗</title>
+
+<style>
+@font-face{font-family:'Shippori Mincho';font-weight:400;font-display:block;src:url(fonts/sm-latin-400.woff2) format('woff2')}
+@font-face{font-family:'Shippori Mincho';font-weight:400;font-display:block;src:url(fonts/sm-jp-400.woff2) format('woff2');unicode-range:U+3000-9FFF,U+FF00-FFEF}
+@font-face{font-family:'Shippori Mincho';font-weight:600;font-display:block;src:url(fonts/sm-latin-600.woff2) format('woff2')}
+@font-face{font-family:'Shippori Mincho';font-weight:600;font-display:block;src:url(fonts/sm-jp-600.woff2) format('woff2');unicode-range:U+3000-9FFF,U+FF00-FFEF}
+@font-face{font-family:'Shippori Mincho';font-weight:800;font-display:block;src:url(fonts/sm-latin-800.woff2) format('woff2')}
+@font-face{font-family:'Shippori Mincho';font-weight:800;font-display:block;src:url(fonts/sm-jp-800.woff2) format('woff2');unicode-range:U+3000-9FFF,U+FF00-FFEF}
+@font-face{font-family:'Chiffres';font-weight:700;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAAZEABAAAAAAC4QAAAXrAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGYFSG1AcVAZgAFwRCAqKAIdoATYCJANECyYABCAFg2gHIBckGCYbMQkoHofpBnt2QFIvSWb58Lit97dZG5hcczojwZo1owo8vKKMwouuhH+QG72/IAi8reZxIIGkYdBtd3hCB3b9D0BO8GpNbQjUu/iwY/8TFR1hY8z/h/ZDfGEHrBhsXCJUbIUHtGXVqSKhKmxdK6zqplukmKVihCA6sgx//61AAFhDpz0GlilpOSXwunt1roP4dDbWQnxpG6rh9dY2aOH10XZtgMgSAECBgTM3XibDEgBAg4EE9mQGgpi3RugUEPPIGDTFVOsrdMl2179MOEZnU33Djqb9GM2F8KYPWQyI0ZNmWWklslO7NRgA+OpGao2dG2ANAGJA+TxES0vARLKOSJG1MD9e1TIvikXFQf3EaRK23dWsANnqHqwzSsESliDAmpSHSe4iBUNfofbCAqBGU2UAsq2TSXvIcgUaDwRoAAnupTnyXMFTrI50o3lkYEYSfudBkEfUXgA8L00BqVSGBsEYZKRtYX266xSi7MANXubmaDYHLy7oJ9wlpaIe/Lr3HwSICAjPwwqm430BD0BzIP0ByhIAADDgo27uozREgypw5Ap7eyteydF8a4m9nJP0JCYZRiK+rHT09etk0I0b3Jhr1zDw6lXVmAM3yKDr+9nRe69i4LV9nEWJSs0xHBl0Q73mypFWSy6zow+CHTRPUDIXYsgtzaUo/V3PktPW7YrBlbFwmWWJyTgC5/vizrUy1R5h8ZR+jZRISCVHcWChm2h+QVCvOpcxb5Cs0eYsLQWLFTuYoCUR6FEvVPAvWb2bVrxasubMmR3c1ouuiw5xS26geoiESLH2qk9+v53o3beM+exic66kMLD8uNSlEQYemtkSoF61jxsz7K88yb6P4FoJaJhCt8XkAJemF/aTQQcy2Ocx36vBl782TRygHTlLPUtLiJTmKC06XsQO6lOtKi5VF5aUFqj+2BS0yfdY0LOnx0JLUlBQlk8CLICufKPneieT3qBprPf03O9oMuj/o/uxLbRXvqg5069oH+RLRtYIdfG7vlEsTfwV88SaquoupVGawJBykmTrm5+StetuWmE7ToebNukVWU0ztHxuSR/nkE3RYQdEQScIvxXCSI+WMYbcjl4tkg1ZcbGaAKE4MjS8aLJjXHlsh84myP+ORY5XDCd17XWzuO8rnHHPIr429kkbMc7oKYpJMYmsUr5jhn6SQfdrJ9dfJpYFh2qz6nv1AGOjyJPHZrgOJVXUsV7bG8M6iLvyY+Uf+OSEPqSX9VteVAtC24SEQL1KTDQqgxLDBIlPQKxD87/o8vWYEbgybPGEJvox2QrfPn7jPMfJ+/fDP5u4dmGh2oSwcFW3poqM4OigMlWwGJkQ8LnRwcqM793CVGGJYR3bhcUahYyo8DwhOC+8izHGb1lwsNnT0xwcvAxHbELbR5zOj2n10CUlvi/pZX2XF8tO86LEQJ1ajFLmyWMy3IaRKvpoz+1lQwLjHJpL/BQn7JJiIOtyxoVXCB14CDtrXYzTzNMHGKjKu4zbywDc7fHS6MblFsUuLsU8n13rjKIZ0O+lY0uxM2LVR3Q2yQ8fZ2UeoIfAuw4ZfnluXge7mG/WHP0SAO4e2eEAAPd+WRnMI0UyNvQjEFiCAgAQgBn5/yFAvzdbMIxyCAIMw361NyXf4d8sUOQQ5D2GrPdgyXXI+ghFC8GSv/DvAWRRCBslw0vgz5F7dDG0DPojABxzQxOZmJ08tDdlBY09wtgAWAuUcgIva+UUrHFZTiPBbTmDoFrKLdCyrK+2hF8GJDNp1Etn1SpV6YonCCIQ8EpUMeJpGDXgFejMpIaRno4SdbNOq2LSWRc8n3VQV42+wSiBAlWqpp3WjU4APZP6GDIx6bfXMapg0qCrLgL13q3sr5ZW83QjU2s0q+n5nsWXTdnnpZcYL++2HpKY1DEIFiDoPuVoGqki6yoaHOvMFI7C7w/r2DPAl2kV41ukq5nYrlOsa+cIDbRq7pPMLxF7kK//JQD90jzBpkUAIEAg8R66EauwBet1bBO2UgVaRYYU9D1a5Sh5jMcAAAA=) format('woff2');unicode-range:U+0030-003A,U+002B,U+00B7,U+00D7,U+2014,U+2212}
+
+:root{--navy2:#060c1a;--ink:#efe8d8;--ink2:#b9b2a2;--ink3:rgba(239,232,216,.16);--red:#8a1c2f;--red2:#c4475b;--paper:#efe8d8;--tint:rgba(239,232,216,.06);--overfill:#2e1220;--warn:#efc3ca;--veil:rgba(6,12,26,.92);--veil2:rgba(6,12,26,.96);--num:'Chiffres','Shippori Mincho',serif}
+body.light{--navy2:#efe8d8;--ink:#0b1529;--ink2:#5b5e6b;--ink3:rgba(11,21,41,.22);--red2:#8a1c2f;--tint:rgba(11,21,41,.06);--overfill:#f2d3d8;--warn:#7a1a2b;--veil:rgba(239,232,216,.93);--veil2:rgba(239,232,216,.97)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--navy2);overscroll-behavior:none}
+body{font-family:'Shippori Mincho',Georgia,serif;color:var(--ink);-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+button{font-family:inherit}
+.app{height:100vh;height:100dvh;max-width:680px;margin:0 auto;display:flex;flex-direction:column;
+padding:calc(10px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left))}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--ink3);padding-bottom:8px;flex-shrink:0}
+.title{display:flex;align-items:center;gap:10px}
+.kanji{font-size:28px;font-weight:800;line-height:1}
+h1{margin:0;font-size:19px;font-weight:600;letter-spacing:.18em;line-height:1.1}
+.sub{font-size:11px;color:var(--ink2);letter-spacing:.06em}
+.hdrbtn.theme{border-color:var(--ink3);color:var(--ink);transform:none;font-size:16px;font-weight:600;margin-right:6px}
+#home .theme{position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;margin:0}
+.back{background:transparent;border:1px solid var(--ink3);color:var(--ink);border-radius:6px;width:34px;height:34px;font-size:24px;line-height:1;cursor:pointer;padding:0 0 3px}
+.title{flex:1}
+.hdrbtn{background:transparent;border:1px solid var(--red);color:var(--red2);border-radius:4px;width:34px;height:34px;font-size:17px;font-weight:800;cursor:pointer;transform:rotate(-6deg)}
+.stats{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--ink2);margin:2px 2px 0;flex-shrink:0}
+.stats .v{color:var(--ink);font-size:15px;font-family:var(--num);font-weight:700;margin-left:4px}
+#meta{font-family:var(--num);font-size:11px;color:var(--ink2);text-align:center;letter-spacing:.05em;margin:3px 0 6px;flex-shrink:0}
+#area{position:relative;flex:1;min-height:0;border:1px solid var(--ink3);border-radius:10px;overflow:hidden;touch-action:none}
+#stage{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#board{display:block;width:100%;height:100%}
+.dot{fill:var(--ink);opacity:.34}
+.zone{fill:rgba(138,28,47,.18);stroke:var(--red2);stroke-width:1.5;stroke-dasharray:6 6;animation:breathe 2s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.45}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hcell{fill:none;stroke:var(--red2);stroke-width:4;animation:breathe 1.2s ease-in-out infinite}
+.gl{stroke:var(--ink3);stroke-width:1.5}
+.gl.b{stroke:var(--ink2);stroke-width:2.6}
+#pad{flex-shrink:0}
+body.arcade .actions{display:none}
+body.arcade #win{background:var(--veil)}
+body.nohints #hintBtn,body.nohints #verifyBtn,body.nohints .stats .hc{display:none}
+#hintBox{display:none;margin-top:6px;min-height:0;border-left:3px solid var(--red);background:var(--tint);padding:7px 10px;border-radius:0 6px 6px 0;font-size:13.5px;line-height:1.45;align-items:center;gap:10px;justify-content:space-between;flex-shrink:0}
+#hintBox.on{display:flex}
+#hintBox.warn{border-left-color:var(--red2);color:var(--warn)}
+#applyBtn{flex-shrink:0}
+.actions{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:8px 0 6px;flex-shrink:0}
+.act{background:transparent;border:1px solid var(--ink3);color:var(--ink);border-radius:6px;height:30px;padding:0 2px;font-size:11.5px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:4px;white-space:nowrap;overflow:hidden}
+.act em{font-style:normal;font-size:14px;line-height:1}
+.act.primary{border-color:var(--red)}
+.act.primary em{color:var(--red2)}
+.small.ghostb{background:transparent;border:1px solid var(--ink3);color:var(--ink)}
+#home{position:fixed;inset:0;z-index:8;background:var(--navy2);overflow:auto;display:flex;padding:calc(20px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom));transition:opacity .35s ease}
+#home.hidden{opacity:0;pointer-events:none}
+.homein{margin:auto;width:100%;max-width:420px;text-align:center}
+.hk{font-size:88px;font-weight:800;line-height:1}
+.ht{font-size:24px;letter-spacing:.5em;margin:10px 0 2px;padding-left:.5em;font-weight:600}
+.hs{font-size:13px;color:var(--ink2);letter-spacing:.06em;margin-bottom:24px}
+.resume{display:none;width:100%;background:var(--red);color:var(--paper);border:0;border-radius:8px;padding:12px;font-size:16px;cursor:pointer;margin-bottom:18px}
+.resume.on{display:block}
+.resume small{display:block;font-family:var(--num);font-size:12px;opacity:.85;margin-top:2px}
+.hlabel{font-size:12px;color:var(--ink2);letter-spacing:.12em;margin-bottom:8px;text-align:left}
+.hlevels{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.hl{display:flex;align-items:center;gap:14px;background:transparent;border:1px solid var(--ink3);border-radius:8px;padding:10px 14px;color:var(--ink);cursor:pointer;text-align:left}
+.hl:active{background:var(--tint)}
+.hl b{font-size:28px;font-weight:800;color:var(--red2);width:34px}
+.hl span{flex:1;display:flex;flex-direction:column}
+.hl strong{font-weight:600;font-size:17px}
+.hl i{font-family:var(--num);font-style:normal;font-size:12px;color:var(--ink2)}
+.hl em{font-family:var(--num);font-style:normal;font-size:12px;color:var(--ink2)}
+.hl em{font-size:12px}
+#customPanel{display:none;border:1px solid var(--ink3);border-radius:8px;padding:12px 14px;text-align:left;margin-top:-2px}
+#customPanel.on{display:block}
+.crow{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:14px}
+.crow span{width:64px;color:var(--ink2)}
+.crow input{flex:1;accent-color:var(--red2);height:28px}
+.crow b{font-family:var(--num);font-weight:700;width:28px;text-align:right;font-size:16px}
+.cseg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink3);border-radius:6px;overflow:hidden;margin:4px 0 12px}
+.cseg button{background:transparent;border:0;color:var(--ink2);padding:8px;font-size:14px;cursor:pointer}
+.cseg button.on{background:var(--ink);color:var(--navy2)}
+.cfoot{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#cInfo{font-family:var(--num);font-size:12px;color:var(--ink2)}
+.link{background:none;border:0;color:var(--ink2);font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.pulse{animation:pulse 1.3s ease-in-out infinite}
+@keyframes pulse{0%,100%{background:transparent}50%{background:rgba(138,28,47,.35);border-color:var(--red2)}}
+.small{background:var(--red);color:var(--paper);border:0;border-radius:5px;padding:7px 12px;font-size:13px;cursor:pointer}
+#win{position:absolute;inset:0;display:none;place-items:center;background:var(--veil);z-index:3}
+#win.on{display:grid}
+#win.reveal{background:transparent;align-items:end}
+#win.reveal .wincard{background:var(--veil);border:1px solid var(--ink3);border-radius:12px;margin:0 10px 10px;padding:12px 18px}
+#win.reveal .seal{width:54px;height:54px;font-size:30px;margin-bottom:8px}
+.wincard{text-align:center;padding:20px}
+.seal{width:104px;height:104px;margin:0 auto 14px;background:var(--red);color:var(--paper);display:grid;place-items:center;font-size:58px;font-weight:800;border-radius:8px;transform:rotate(-8deg);animation:stamp .5s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes stamp{0%{transform:scale(2.4) rotate(-20deg);opacity:0}100%{transform:scale(1) rotate(-8deg);opacity:1}}
+.wincard h2{margin:0 0 6px;font-size:21px;letter-spacing:.12em;font-weight:600}
+.wincard p{font-family:var(--num);margin:4px 0;color:var(--ink2)}
+#winRecord{color:var(--red2)!important}
+#loading{position:absolute;inset:0;display:none;place-items:center;color:var(--ink2);font-size:14px;letter-spacing:.1em;background:var(--navy2);z-index:3}
+#loading.on{display:grid}
+#rules{position:fixed;inset:0;z-index:10;background:var(--veil2);display:none;overflow:auto;padding:calc(20px + env(safe-area-inset-top)) 20px 20px}
+#rules.on{display:block}
+.rulescard{max-width:560px;margin:0 auto;font-size:14.5px;line-height:1.65;color:var(--ink2)}
+.rulescard h3{margin:14px 0 6px;color:var(--ink);font-weight:600;font-size:17px}
+.rulescard ul{margin:0;padding-left:18px}
+.rulescard b{color:var(--ink)}
+#intro{position:fixed;inset:0;z-index:20;background:var(--navy2);display:grid;place-items:center;transition:opacity .6s ease}
+#intro.out{opacity:0;pointer-events:none}
+#intro svg{width:min(70vw,300px);height:auto;overflow:visible}
+.ic{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-dasharray:1;stroke-dashoffset:1;animation:draw .5s ease-out forwards}
+.icf{fill:var(--ink);opacity:0;animation:fade .3s ease-out forwards}
+.ik{font-family:'Shippori Mincho',serif;font-weight:800;font-size:64px;fill:var(--ink);text-anchor:middle;opacity:0;animation:rise .7s ease-out forwards}
+.it{font-family:'Shippori Mincho',serif;font-weight:600;font-size:15px;letter-spacing:.5em;fill:var(--ink2);text-anchor:middle;opacity:0;animation:fade .6s ease-out forwards}
+.iseal{fill:var(--red);opacity:0;transform-origin:252px 238px;animation:stampi .45s cubic-bezier(.2,1.6,.4,1) forwards}
+@keyframes fade{to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes stampi{0%{opacity:0;transform:scale(2.2) rotate(-25deg)}100%{opacity:1;transform:scale(1) rotate(-8deg)}}
+@media (max-width:400px){.actions{gap:4px}.act{font-size:10px;gap:2px;padding:0 1px;letter-spacing:-.01em}.act em{font-size:12px}}
+@media (max-width:340px){.act em{display:none}}
+@media (max-height:640px){.hk{font-size:64px}.hs{margin-bottom:14px}.hl{padding:7px 12px}}
+.nk-sea{fill:var(--ink);fill-opacity:.82}
+.nk-sea.bad{fill:var(--red2);fill-opacity:1}
+.nk-isl circle{fill:var(--navy2);stroke:var(--ink);stroke-width:2.4}
+.nk-isl text{fill:var(--ink);font-family:'Chiffres',sans-serif;font-size:26px;font-weight:700;text-anchor:middle}
+.nk-isl.full circle{fill:var(--ink)}
+.nk-isl.full text{fill:var(--navy2)}
+.nk-dot{fill:var(--ink2)}
+.nk-dot.bad{fill:var(--red2)}
+.nk-ghost{fill:none;stroke:var(--red2);stroke-width:4;stroke-dasharray:6 5;animation:breathe 1.3s ease-in-out infinite}
+
+</style>
+</head>
+<body>
+<script>try{if(localStorage.getItem('theme')==='"light"')document.body.classList.add('light')}catch(e){}</script>
+<div id="intro">
+  <svg viewBox="0 0 300 300" aria-label="Nurikabe">
+    <rect class="ic" x="105" y="50" width="30" height="30" pathLength="1" style="animation-delay:0.00s;stroke-width:1.5"/><rect class="ic" x="135" y="50" width="30" height="30" pathLength="1" style="animation-delay:0.05s;stroke-width:1.5"/><rect class="ic" x="165" y="50" width="30" height="30" pathLength="1" style="animation-delay:0.10s;stroke-width:1.5"/><rect class="ic" x="105" y="80" width="30" height="30" pathLength="1" style="animation-delay:0.15s;stroke-width:1.5"/><rect class="ic" x="135" y="80" width="30" height="30" pathLength="1" style="animation-delay:0.20s;stroke-width:1.5"/><rect class="ic" x="165" y="80" width="30" height="30" pathLength="1" style="animation-delay:0.25s;stroke-width:1.5"/><rect class="ic" x="105" y="110" width="30" height="30" pathLength="1" style="animation-delay:0.30s;stroke-width:1.5"/><rect class="ic" x="135" y="110" width="30" height="30" pathLength="1" style="animation-delay:0.35s;stroke-width:1.5"/><rect class="ic" x="165" y="110" width="30" height="30" pathLength="1" style="animation-delay:0.40s;stroke-width:1.5"/><rect x="106.5" y="51.5" width="27" height="27" rx="3" style="fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.50s forwards"/><rect x="166.5" y="51.5" width="27" height="27" rx="3" style="fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.58s forwards"/><circle cx="120" cy="95" r="11" style="fill:var(--navy2);stroke:var(--ink);stroke-width:2"/><text x="120" y="100" style="fill:var(--ink);font-family:Chiffres,sans-serif;font-size:14px;font-weight:700;text-anchor:middle">3</text><rect x="166.5" y="81.5" width="27" height="27" rx="3" style="fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.66s forwards"/><rect x="106.5" y="111.5" width="27" height="27" rx="3" style="fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.74s forwards"/><rect x="136.5" y="111.5" width="27" height="27" rx="3" style="fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.82s forwards"/><circle cx="180" cy="125" r="11" style="fill:var(--navy2);stroke:var(--ink);stroke-width:2"/><text x="180" y="130" style="fill:var(--ink);font-family:Chiffres,sans-serif;font-size:14px;font-weight:700;text-anchor:middle">1</text>
+    <text class="ik" x="150" y="252" style="animation-delay:1.25s">塗</text>
+    <rect class="iseal" x="240" y="226" width="24" height="24" rx="3" style="animation-delay:1.7s"/>
+    <text class="it" x="156" y="290" style="animation-delay:1.5s">NURIKABE</text>
+  </svg>
+</div>
+<section id="home">
+  <button class="hdrbtn theme" data-theme-btn aria-label="Changer de mode">明</button>
+  <div class="homein">
+    <div class="hk">塗</div>
+    <h1 class="ht">NURIKABE</h1>
+    <div class="hs">Peindre la mer autour des îles</div>
+    <button id="resumeBtn" class="resume">Reprendre la partie<small id="resumeInfo"></small></button>
+    <div class="hlabel" id="levelsLabel">Choisis ton niveau</div>
+    <div class="hlevels">
+      <div id="levelsList" style="display:flex;flex-direction:column;gap:8px"></div>
+      <button class="hl" id="customBtn"><b>自</b><span><strong>Personnalisé</strong><i>choisis la taille</i></span><em>›</em></button>
+      <div id="customPanel">
+        <label class="crow"><span>Largeur</span><input type="range" id="cw" step="1"><b id="cwV"></b></label>
+        <label class="crow" id="chRow"><span>Hauteur</span><input type="range" id="ch" step="1"><b id="chV"></b></label>
+        <div class="cseg"><button id="cClassic" class="on">Classique</button><button id="cHard">Difficile</button></div>
+        <div class="cfoot"><span id="cInfo"></span><button class="small" id="cPlay">Jouer</button></div>
+      </div>
+    </div>
+    <button class="link" id="rulesBtn2">Règles du jeu</button>
+  </div>
+</section>
+<div class="app">
+  <header>
+    <button class="back" id="backBtn" aria-label="Choix du niveau">‹</button>
+    <div class="title"><span class="kanji">塗</span><h1>NURIKABE</h1></div>
+    <div style="display:flex"><button class="hdrbtn theme" data-theme-btn aria-label="Changer de mode">明</button><button class="hdrbtn" id="rulesBtn" aria-label="Règles">?</button></div>
+  </header>
+  <div class="actions">
+    <button class="act" id="undoBtn"><em>戻</em>Annuler</button>
+    <button class="act" id="verifyBtn"><em>検</em>Vérifier</button>
+    <button class="act primary" id="hintBtn"><em>灯</em><span>Indice</span></button>
+    <button class="act" id="resetBtn"><em>消</em>Effacer</button>
+    <button class="act" id="newBtn"><em>新</em>Nouvelle</button>
+  </div>
+  <div class="stats">
+    <div><span id="stat1L">Temps</span><span class="v" id="timer">0:00</span></div>
+    <div class="hc">Indices<span class="v" id="hintCount">0</span></div>
+    <div>Record<span class="v" id="best">—</span></div>
+  </div>
+  <div id="meta"></div>
+  <div id="area">
+    <div id="stage"><svg id="board" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg></div>
+    <div id="win"><div class="wincard">
+      <div class="seal">完</div>
+      <h2 id="winTitle">Grille résolue</h2>
+      <p id="winLine">Temps : <span id="winTime"></span> · <span id="winHints"></span></p>
+      <p id="winRecord">Nouveau record pour ce niveau</p>
+      <p style="margin-top:14px;display:flex;gap:8px;justify-content:center"><button class="small" id="winNew">Nouvelle grille</button><button class="small ghostb" id="winHome">Changer de niveau</button></p>
+    </div></div>
+    <div id="loading">Préparation de l'encre…</div>
+  </div>
+  <div id="pad"></div>
+  <div id="hintBox"><span id="hintText"></span><button class="small" id="applyBtn">Poser</button></div>
+</div>
+<div id="rules"><div class="rulescard">
+  <div id="rulesBody"></div>
+  <h3>Commandes communes</h3>
+  <ul>
+    <li><b>Zoom</b> : pince à deux doigts (ou molette de la souris).</li>
+    <li>L'<b>indice</b> se précise à chaque appui : une zone, puis l'endroit, puis la déduction expliquée.</li>
+    <li>Le bouton ‹ ramène au choix du niveau, ta partie est gardée. 明 / 暗 passe en mode clair ou sombre.</li>
+  </ul>
+  <p style="text-align:center;margin-top:18px"><button class="small" id="rulesClose">Fermer</button></p>
+</div></div>
+<script>
+// ---------------------------------------------------------------------------
+// Noyau commun des jeux de la série (écrans, zoom, gestes, indices, records)
+// ---------------------------------------------------------------------------
+const S = 60, IDLE_MS = 120000;
+const $ = id => document.getElementById(id);
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+function registerGame(m) { G = m; }
+const dims = s => (G.dims ? G.dims(s) : { cols: s.W, rows: s.H, ox: 0, oy: 0 });
+
+let G = null;              // current game module
+let st = null;             // current game state (saved)
+let inGame = false, undo = [], hint = null, flashWrong = null, won = false, fresh = null;
+
+function fmt(ms) {
+  const s = Math.floor(ms / 1000);
+  return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+}
+function plural(n, w) { return n + ' ' + w + (n > 1 ? 's' : ''); }
+
+// ---------- state & storage ----------
+const keyState = id => id + '-v1', keyBest = id => id + '-best', keyCustom = id => id + '-custom';
+function save() { if (st && G) store.set(keyState(G.id), st); }
+function levelOf(s) {
+  if (s.level === 'perso') return G.customLevel(s.custom.W, s.custom.H, s.custom.hard);
+  return G.levels[s.level];
+}
+function bestKey() { return st.level === 'perso' ? `perso-${st.W}x${st.H}${st.custom && st.custom.hard ? '-d' : ''}` : st.level; }
+
+function newGame(level, custom) {
+  if (level === 'perso') custom = custom || (st && st.custom) || store.get(keyCustom(G.id)) || G.customDefault;
+  const L = level === 'perso' ? G.customLevel(custom.W, custom.H, custom.hard) : G.levels[level];
+  $('loading').classList.add('on');
+  setTimeout(() => {
+    const data = G.generate(L);
+    st = Object.assign({ level, custom: level === 'perso' ? custom : null, elapsed: 0, hints: 0, done: false,
+      no: 1000 + Math.floor(Math.random() * 9000) }, data);
+    st.x = G.emptyX(st);
+    start();
+    $('loading').classList.remove('on');
+  }, 30);
+}
+function start() {
+  G.prepare(st);
+  undo = []; hint = null; flashWrong = null; won = st.done; fresh = null;
+  st.lastProg = Date.now(); st.bestProg = G.progress(st);
+  const L = levelOf(st);
+  $('meta').textContent = G.arcade ? L.label + ' · ' + st.W + '×' + st.H : L.label + (st.custom && st.custom.hard ? ' difficile' : '') + ' · ' + st.W + '×' + st.H + ' · grille n° ' + st.no;
+  const d = dims(st);
+  $('board').setAttribute('viewBox', `0 0 ${d.cols * S} ${d.rows * S}`);
+  $('pad').innerHTML = G.padHTML ? G.padHTML(st) : '';
+  if (G.padBind) G.padBind(st);
+  fitStage(true);
+  $('win').classList.remove('on');
+  showHintText('');
+  render(); save(); updateStats();
+  if (won) showWin(false);
+}
+
+// ---------- moves (used by the game modules) ----------
+let stroke = false;
+function snapshot() { undo.push(st.x.slice()); if (undo.length > 400) undo.shift(); }
+function commit(mutator) {            // one complete move
+  if (won) return;
+  snapshot();
+  mutator();
+  afterMove();
+}
+function beginStroke() { if (won) return false; snapshot(); stroke = true; return true; }
+function strokeChanged() { hint = null; flashWrong = null; render(); }
+function endStroke(changed) {
+  if (!stroke) return;
+  stroke = false;
+  if (!changed) { undo.pop(); return; }
+  afterMove();
+}
+function afterMove() {
+  hint = null; flashWrong = null; showHintText('');
+  updateStats();
+  const p = G.progress(st);
+  if (p > st.bestProg) { st.bestProg = p; st.lastProg = Date.now(); }
+  render(); save(); checkWin();
+}
+function say(msg, warn) { showHintText(msg, warn !== false); }
+
+function checkWin() {
+  const r = G.check(st);
+  if (r !== true) { if (typeof r === 'string') showHintText(r, true); return; }
+  st.done = true; won = true; save();
+  const bests = store.get(keyBest(G.id)) || {};
+  const prev = bests[bestKey()];
+  const val = G.recordValue ? G.recordValue(st) : st.elapsed;
+  const record = G.recordHigh ? (val > 0 && (!prev || val > prev)) : (st.hints === 0 && (!prev || val < prev));
+  if (record) { bests[bestKey()] = val; store.set(keyBest(G.id), bests); }
+  showWin(record);
+}
+function showWin(record) {
+  $('winTitle').textContent = G.winText || 'Grille résolue';
+  if (G.winLineText) $('winLine').textContent = G.winLineText(st);
+  else $('winLine').innerHTML = `Temps : <span id="winTime">${fmt(st.elapsed)}</span> · <span id="winHints">${st.hints === 0 ? 'sans indice' : plural(st.hints, 'indice')}</span>`;
+  $('winRecord').style.display = record ? 'block' : 'none';
+  fitStage(true);
+  $('win').classList.toggle('reveal', !!G.revealWin);
+  $('win').classList.add('on');
+  render();
+}
+
+// ---------- rendering ----------
+function render() {
+  if (!st) return;
+  const parts = [];
+  const d = dims(st);
+  if (hint && hint.level >= 1 && hint.r !== undefined) {
+    const r0 = Math.max(0, hint.r - 2), r1 = Math.min(st.H - 1, hint.r + 2), c0 = Math.max(0, hint.c - 2), c1 = Math.min(st.W - 1, hint.c + 2);
+    parts.push(`<rect class="zone" x="${(c0 + d.ox) * S + 4}" y="${(r0 + d.oy) * S + 4}" width="${(c1 - c0 + 1) * S - 8}" height="${(r1 - r0 + 1) * S - 8}" rx="14"/>`);
+  }
+  parts.push(G.render(st, { hint, flash: flashWrong, fresh, won }));
+  $('board').innerHTML = parts.join('');
+  if (G.afterRender) G.afterRender(st, { hint, won });
+  fresh = null;
+}
+function svgPoint(ev) {
+  const svg = $('board'), p = svg.createSVGPoint();
+  p.x = ev.clientX; p.y = ev.clientY;
+  return p.matrixTransform(svg.getScreenCTM().inverse());
+}
+function cellAt(pt) {
+  const d = dims(st);
+  const c = Math.floor(pt.x / S - d.ox), r = Math.floor(pt.y / S - d.oy);
+  if (r < 0 || c < 0 || r >= st.H || c >= st.W) return null;
+  return { r, c };
+}
+
+// ---------- zoom ----------
+const Z = { s: 1, tx: 0, ty: 0, w: 0, h: 0, cell: 1, maxS: 3 };
+function areaSize() { const a = $('area'); return { aw: a.clientWidth, ah: a.clientHeight }; }
+function fitStage(reset) {
+  if (!st) return;
+  const { aw, ah } = areaSize(), pad = 6;
+  const d = dims(st);
+  const cell = Math.max(1, Math.min((aw - pad * 2) / d.cols, (ah - pad * 2) / d.rows));
+  Z.cell = cell; Z.w = cell * d.cols; Z.h = cell * d.rows;
+  Z.maxS = G.noZoom ? 1 : Math.max(2.5, 56 / cell);
+  if (reset) Z.s = 1;
+  applyZ();
+}
+function applyZ() {
+  const { aw, ah } = areaSize();
+  Z.s = Math.min(Z.maxS, Math.max(1, Z.s));
+  const sw = Z.w * Z.s, sh = Z.h * Z.s;
+  Z.tx = sw <= aw ? (aw - sw) / 2 : Math.min(0, Math.max(aw - sw, Z.tx));
+  Z.ty = sh <= ah ? (ah - sh) / 2 : Math.min(0, Math.max(ah - sh, Z.ty));
+  const stg = $('stage');
+  stg.style.width = sw + 'px'; stg.style.height = sh + 'px';
+  stg.style.transform = `translate(${Z.tx}px,${Z.ty}px)`;
+}
+function zoomAt(f, px, py) {
+  const cx = (px - Z.tx) / Z.s, cy = (py - Z.ty) / Z.s;
+  Z.s = Math.min(Z.maxS, Math.max(1, Z.s * f));
+  Z.tx = px - cx * Z.s; Z.ty = py - cy * Z.s;
+  applyZ();
+}
+function focusCell(r, c) {
+  if (Z.s <= 1.01 || r === undefined) return;
+  const { aw, ah } = areaSize(), d = dims(st);
+  r += d.oy; c += d.ox;
+  Z.tx = aw / 2 - (c + .5) * Z.cell * Z.s;
+  Z.ty = ah / 2 - (r + .5) * Z.cell * Z.s;
+  applyZ();
+}
+
+// ---------- gestures ----------
+// One finger: the game decides (draw, paint, tap). Where the game allows it (pan: true), a drag pans once zoomed.
+// Two fingers: pinch zoom and pan.
+function areaXY(ev) { const r = $('area').getBoundingClientRect(); return { x: ev.clientX - r.left, y: ev.clientY - r.top }; }
+const ptrs = new Map();
+let gest = null;
+function onDown(ev) {
+  if (!st || ev.target.closest('#win')) return;
+  ev.preventDefault();
+  try { $('area').setPointerCapture(ev.pointerId); } catch (e) {}
+  const p = areaXY(ev);
+  ptrs.set(ev.pointerId, p);
+  if (ptrs.size === 1) {
+    const pt = svgPoint(ev);
+    const g = won ? { pan: true } : (G.pointerDown(st, pt) || { pan: true });
+    gest = { mode: 'game', start: p, pt, g, tx0: Z.tx, ty0: Z.ty };
+  } else if (ptrs.size === 2) {
+    if (gest && gest.mode === 'game' && G.pointerCancel) G.pointerCancel(st, gest.g);
+    const [a, b] = [...ptrs.values()];
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    gest = { mode: 'pinch', d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, s0: Z.s, cx: (mx - Z.tx) / Z.s, cy: (my - Z.ty) / Z.s };
+  }
+}
+function onMove(ev) {
+  if (!ptrs.has(ev.pointerId) || !gest) return;
+  const p = areaXY(ev);
+  ptrs.set(ev.pointerId, p);
+  if (gest.mode === 'pinch' && ptrs.size >= 2) {
+    const [a, b] = [...ptrs.values()];
+    const d = Math.hypot(a.x - b.x, a.y - b.y), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    Z.s = Math.min(Z.maxS, Math.max(1, gest.s0 * d / gest.d0));
+    Z.tx = mx - gest.cx * Z.s; Z.ty = my - gest.cy * Z.s;
+    applyZ();
+    return;
+  }
+  if (gest.mode === 'game') {
+    const moved = Math.hypot(p.x - gest.start.x, p.y - gest.start.y);
+    if (gest.g.pan && moved > 8) { gest.mode = Z.s > 1.01 ? 'pan' : 'none'; }
+    else if (!won && G.pointerMove) G.pointerMove(st, gest.g, svgPoint(ev));
+  }
+  if (gest.mode === 'pan') {
+    Z.tx = gest.tx0 + (p.x - gest.start.x); Z.ty = gest.ty0 + (p.y - gest.start.y);
+    applyZ();
+  }
+}
+function onEnd(ev) {
+  if (!ptrs.has(ev.pointerId)) return;
+  ptrs.delete(ev.pointerId);
+  const g = gest;
+  if (g && g.mode === 'game' && !won) {
+    if (ev.type === 'pointerup') G.pointerUp(st, g.g, svgPoint(ev), g.pt);
+    else if (G.pointerCancel) G.pointerCancel(st, g.g);
+  }
+  if (ptrs.size === 0) gest = null;
+  else if (g && g.mode === 'pinch') gest = { mode: 'none' };
+}
+function onWheel(ev) {
+  if (!st) return;
+  ev.preventDefault();
+  const p = areaXY(ev);
+  zoomAt(Math.exp(-ev.deltaY * 0.0015), p.x, p.y);
+}
+
+// ---------- hints ----------
+function askHint() {
+  if (!st || won) return;
+  if (!hint) {
+    hint = G.findHint(st);
+    if (!hint) return;
+    hint.level = 0;
+    st.hints++; save(); updateStats();
+  }
+  hint.level = Math.min(3, hint.level + 1);
+  const msgs = {
+    1: hint.type === 'wrong' ? 'Il y a une erreur quelque part dans cette zone.' : 'Regarde dans cette zone : une déduction t\'y attend.',
+    2: hint.focusText || 'Concentre-toi sur cet endroit.',
+    3: hint.text
+  };
+  showHintText(msgs[hint.level], false, hint.level === 3 && !!hint.apply);
+  $('hintBtn').classList.remove('pulse');
+  $('hintBtn').querySelector('span').textContent = hint.level < 3 ? 'Suite' : 'Indice';
+  st.lastProg = Date.now();
+  render();
+  focusCell(hint.r, hint.c);
+}
+function applyHint() {
+  if (!hint || hint.level < 3 || !hint.apply) return;
+  const h = hint;
+  snapshot();
+  const ok = h.apply(st);
+  if (ok === false) { undo.pop(); return; }
+  fresh = h.fresh || null;
+  $('hintBtn').querySelector('span').textContent = 'Indice';
+  afterMove();
+}
+function showHintText(t, warn, withApply) {
+  $('hintText').textContent = t;
+  $('hintBox').classList.toggle('on', !!t);
+  $('hintBox').classList.toggle('warn', !!warn);
+  $('applyBtn').style.display = withApply ? 'inline-flex' : 'none';
+  if (!t) $('hintBtn').querySelector('span').textContent = 'Indice';
+}
+function verify() {
+  if (!st || won) return;
+  const bad = G.wrong(st);
+  flashWrong = bad;
+  showHintText(bad.size ? G.wrongText(bad.size) : 'Aucune erreur pour l\'instant. Continue.', bad.size > 0);
+  render();
+  setTimeout(() => { flashWrong = null; render(); }, 2500);
+}
+function doUndo() {
+  if (!undo.length || won) return;
+  st.x = undo.pop();
+  hint = null; showHintText(''); render(); save();
+}
+function reset() {
+  if (!st) return;
+  snapshot();
+  st.x = G.emptyX(st); st.done = false; won = false; hint = null;
+  $('win').classList.remove('on'); showHintText(''); render(); save();
+}
+function updateStats() {
+  if (!st) return;
+  $('timer').textContent = G.statValue ? G.statValue(st) : fmt(st.elapsed);
+  $('hintCount').textContent = st.hints;
+  const b = (store.get(keyBest(G.id)) || {})[bestKey()];
+  $('best').textContent = b ? (G.bestFmt ? G.bestFmt(b) : fmt(b)) : '—';
+}
+function tick() {
+  if (!st || won || document.hidden || !inGame) return;
+  st.elapsed += 1000; updateStats();
+  if (!G.noHints && Date.now() - st.lastProg > IDLE_MS && !hint) {
+    if (!$('hintBtn').classList.contains('pulse')) {
+      $('hintBtn').classList.add('pulse');
+      showHintText('Tu bloques ? Un indice t\'attend.');
+    }
+  }
+  if (st.elapsed % 5000 === 0) save();
+}
+
+// ---------- screens ----------
+function showView(v) {              // 'home' | 'game'
+  inGame = v === 'game';
+  $('home').classList.toggle('hidden', v === 'game');
+  if (v === 'game' && st) { st.lastProg = Date.now(); fitStage(false); }
+  if (v !== 'game') $('home').scrollTop = 0;
+}
+function loadSaved() {
+  const saved = store.get(keyState(G.id));
+  if (saved && saved.W && G.valid(saved) && (saved.level === 'perso' ? saved.custom && G.customLevel : G.levels[saved.level])) {
+    st = saved;
+    try { start(); } catch (e) { console.error(e); st = null; }
+  }
+}
+function renderLevels() {
+  const bests = store.get(keyBest(G.id)) || {};
+  $('levelsList').innerHTML = Object.keys(G.levels).map(k => {
+    const L = G.levels[k], b = bests[k];
+    const size = L.sizeLabel || (L.W + '×' + L.H);
+    return `<button class="hl" data-l="${k}"><b>${L.kanji}</b><span><strong>${L.label}</strong><i>${size}</i></span><em>${b ? (G.bestLabel ? G.bestLabel(b) : 'record ' + fmt(b)) : ''}</em></button>`;
+  }).join('');
+  document.querySelectorAll('#levelsList [data-l]').forEach(b => b.addEventListener('click', () => { showView('game'); newGame(b.dataset.l); }));
+  const rb = $('resumeBtn');
+  if (st && !st.done) {
+    const L = levelOf(st);
+    $('resumeInfo').textContent = L.label + (st.custom && st.custom.hard ? ' difficile' : '') + ' · ' + (L.sizeLabel || st.W + '×' + st.H) + ' · ' + (G.resumeLabel ? G.resumeLabel(st) : fmt(st.elapsed));
+    rb.classList.add('on');
+  } else rb.classList.remove('on');
+  $('customBtn').style.display = G.customLevel ? '' : 'none';
+  if (G.customLevel) {
+    const c = store.get(keyCustom(G.id)) || G.customDefault;
+    $('cw').min = G.customRange.W[0]; $('cw').max = G.customRange.W[1];
+    $('ch').min = G.customRange.H[0]; $('ch').max = G.customRange.H[1];
+    $('cw').value = c.W; $('ch').value = c.H;
+    $('cHard').classList.toggle('on', !!c.hard); $('cClassic').classList.toggle('on', !c.hard);
+  }
+  $('customPanel').classList.remove('on');
+  syncCustom();
+}
+function syncCustom() {
+  if (!G || !G.customLevel) return;
+  $('cwV').textContent = $('cw').value; $('chV').textContent = $('ch').value;
+  $('cInfo').textContent = G.customInfo(+$('cw').value, +$('ch').value, $('cHard').classList.contains('on'));
+}
+function backFromGame() { if (st) save(); renderLevels(); showView('home'); }
+
+// ---------- theme ----------
+function applyTheme(light) {
+  document.body.classList.toggle('light', light);
+  document.querySelectorAll('[data-theme-btn]').forEach(b => {
+    b.textContent = light ? '暗' : '明';
+    b.setAttribute('aria-label', light ? 'Mode sombre' : 'Mode clair');
+  });
+  try {
+    const SB = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.SystemBars;
+    if (SB && SB.setStyle) SB.setStyle({ style: light ? 'LIGHT' : 'DARK' });
+  } catch (e) {}
+}
+
+function init() {
+  applyTheme(store.get('theme') === 'light');
+  document.querySelectorAll('[data-theme-btn]').forEach(b => b.addEventListener('click', () => {
+    const light = !document.body.classList.contains('light');
+    store.set('theme', light ? 'light' : 'dark');
+    applyTheme(light);
+  }));
+  ['cw', 'ch'].forEach(id => $(id).addEventListener('input', syncCustom));
+  $('cClassic').addEventListener('click', () => { $('cClassic').classList.add('on'); $('cHard').classList.remove('on'); syncCustom(); });
+  $('cHard').addEventListener('click', () => { $('cHard').classList.add('on'); $('cClassic').classList.remove('on'); syncCustom(); });
+  $('customBtn').addEventListener('click', () => { const on = $('customPanel').classList.toggle('on'); syncCustom(); if (on) setTimeout(() => $('customPanel').scrollIntoView({ behavior: 'smooth', block: 'end' }), 50); });
+  $('cPlay').addEventListener('click', () => {
+    const c = { W: +$('cw').value, H: +$('ch').value, hard: $('cHard').classList.contains('on') };
+    store.set(keyCustom(G.id), c);
+    showView('game'); newGame('perso', c);
+  });
+  $('resumeBtn').addEventListener('click', () => showView('game'));
+  $('backBtn').addEventListener('click', backFromGame);
+  $('winHome').addEventListener('click', backFromGame);
+  $('rulesBtn2').addEventListener('click', () => $('rules').classList.add('on'));
+  const area = $('area');
+  area.addEventListener('pointerdown', onDown);
+  area.addEventListener('pointermove', onMove);
+  area.addEventListener('pointerup', onEnd);
+  area.addEventListener('pointercancel', onEnd);
+  area.addEventListener('wheel', onWheel, { passive: false });
+  $('hintBtn').addEventListener('click', askHint);
+  $('applyBtn').addEventListener('click', applyHint);
+  $('verifyBtn').addEventListener('click', verify);
+  $('undoBtn').addEventListener('click', doUndo);
+  $('resetBtn').addEventListener('click', reset);
+  $('newBtn').addEventListener('click', () => newGame(st ? st.level : Object.keys(G.levels)[0]));
+  $('winNew').addEventListener('click', () => newGame(st.level));
+  window.addEventListener('resize', () => fitStage(false));
+  $('rulesBtn').addEventListener('click', () => $('rules').classList.add('on'));
+  $('rulesClose').addEventListener('click', () => $('rules').classList.remove('on'));
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'z') { e.preventDefault(); doUndo(); return; }
+    if (inGame && st && !won && G.onKey) G.onKey(st, e);
+  });
+  if (G.noHints) document.body.classList.add('nohints');
+  if (G.arcade) document.body.classList.add('arcade');
+  if (G.statLabel) $('stat1L').textContent = G.statLabel;
+  if (G.newText) $('winNew').textContent = G.newText;
+  $('rulesBody').innerHTML = G.rules;
+  loadSaved();
+  renderLevels();
+  showView('home');
+  setInterval(tick, 1000);
+  const intro = $('intro');
+  const hideIntro = () => { if (intro.classList.contains('out')) return; intro.classList.add('out'); setTimeout(() => intro.remove(), 700); };
+  intro.addEventListener('pointerdown', hideIntro);
+  setTimeout(hideIntro, 2700);
+}
+
+// Nurikabe 塗 : moteur (générateur, solveur, raisonnements)
+// Cases : -1 inconnue, 0 mer (noire), 1 île (blanche).
+const NuriEngine = (function () {
+  function makeBoard(W, H, clues) {         // clues: [{r,c,n}]
+    const N = W * H, clueAt = new Int16Array(N);
+    clues.forEach(q => (clueAt[q.r * W + q.c] = q.n));
+    const nb = [];
+    for (let i = 0; i < N; i++) {
+      const r = (i / W) | 0, c = i % W, l = [];
+      if (r > 0) l.push(i - W); if (r < H - 1) l.push(i + W);
+      if (c > 0) l.push(i - 1); if (c < W - 1) l.push(i + 1);
+      nb.push(l);
+    }
+    const total = clues.reduce((a, q) => a + q.n, 0);
+    return { W, H, N, clues, clueAt, nb, whiteTotal: total, blackTotal: N - total };
+  }
+  function initial(B) {
+    const v = new Int8Array(B.N).fill(-1);
+    for (let i = 0; i < B.N; i++) if (B.clueAt[i]) v[i] = 1;
+    return v;
+  }
+  // white components: comp[i] = id, info[id] = {cells, clue, clueCell}
+  function whiteComps(B, v) {
+    const comp = new Int32Array(B.N).fill(-1), info = [];
+    for (let i = 0; i < B.N; i++) if (v[i] === 1 && comp[i] < 0) {
+      const id = info.length, cells = [i]; comp[i] = id;
+      let clue = 0, clueCell = -1, clues = 0;
+      for (let k = 0; k < cells.length; k++) {
+        const a = cells[k];
+        if (B.clueAt[a]) { clue = B.clueAt[a]; clueCell = a; clues++; }
+        for (const b of B.nb[a]) if (v[b] === 1 && comp[b] < 0) { comp[b] = id; cells.push(b); }
+      }
+      info.push({ cells, clue, clueCell, clues });
+    }
+    return { comp, info };
+  }
+  function blackComps(B, v) {
+    const comp = new Int32Array(B.N).fill(-1), info = [];
+    for (let i = 0; i < B.N; i++) if (v[i] === 0 && comp[i] < 0) {
+      const id = info.length, cells = [i]; comp[i] = id;
+      for (let k = 0; k < cells.length; k++) for (const b of B.nb[cells[k]]) if (v[b] === 0 && comp[b] < 0) { comp[b] = id; cells.push(b); }
+      info.push({ cells });
+    }
+    return { comp, info };
+  }
+  const REASON = {
+    full: n => `Cette île de ${n} est complète : les cases qui la touchent sont forcément de la mer.`,
+    between: () => `Cette case toucherait deux îles numérotées à la fois, qui se retrouveraient soudées : c'est forcément de la mer.`,
+    toobig: n => `Si cette case était de la terre, l'île de ${n} deviendrait trop grande : c'est forcément de la mer.`,
+    far: () => `Aucune île numérotée ne peut s'étendre jusqu'ici avec sa taille : cette case est forcément de la mer.`,
+    grow: n => `L'île de ${n} doit encore grandir et n'a plus qu'une seule sortie : cette case en fait partie.`,
+    escape: () => `Ces cases de terre doivent rejoindre une île numérotée, et il ne reste qu'un seul passage : cette case est de la terre.`,
+    pool: () => `Sinon, quatre cases de mer formeraient un carré 2×2, ce qui est interdit : cette case est de la terre.`,
+    sea: () => `Cette zone de mer doit rejoindre le reste de la mer, et ce passage est le seul possible : c'est de la mer.`,
+    countB: () => `Toutes les cases de mer sont déjà placées : les cases restantes sont de la terre.`,
+    countW: () => `Toutes les îles ont déjà leur taille : les cases restantes sont de la mer.`
+  };
+  // note(i, val, reasonText, focusCell) -> true to stop
+  function propagate(B, v, note) {
+    const set = (i, val, why, focus) => {
+      if (v[i] === val) return 0;
+      if (v[i] !== -1) return -1;
+      v[i] = val;
+      if (note && note(i, val, why, focus)) return 2;
+      return 1;
+    };
+    let changed = true;
+    while (changed) {
+      changed = false;
+      const { comp, info } = whiteComps(B, v);
+      for (const w of info) {
+        if (w.clues > 1) return false;
+        if (w.clue && w.cells.length > w.clue) return false;
+      }
+      // A. complete islands, merges that would join two clues or exceed a size
+      for (let i = 0; i < B.N; i++) {
+        if (v[i] !== -1) continue;
+        const ids = [];
+        for (const b of B.nb[i]) if (v[b] === 1 && !ids.includes(comp[b])) ids.push(comp[b]);
+        if (!ids.length) continue;
+        let clues = 0, size = 1, clue = 0, cc = -1;
+        for (const id of ids) { clues += info[id].clues; size += info[id].cells.length; if (info[id].clue) { clue = info[id].clue; cc = info[id].clueCell; } }
+        let why = null;
+        if (clues > 1) why = REASON.between();
+        else if (clue && size > clue) {
+          const full = ids.some(id => info[id].clue && info[id].cells.length === info[id].clue);
+          why = full ? REASON.full(clue) : REASON.toobig(clue);
+        }
+        if (why) {
+          const r = set(i, 0, why, cc >= 0 ? cc : i);
+          if (r < 0) return false; if (r === 2) return 'stop'; if (r) changed = true;
+        }
+      }
+      if (changed) continue;
+      // B. 2x2 pools
+      for (let r = 0; r < B.H - 1; r++) for (let c = 0; c < B.W - 1; c++) {
+        const q = [r * B.W + c, r * B.W + c + 1, (r + 1) * B.W + c, (r + 1) * B.W + c + 1];
+        let blacks = 0, unk = -1, nu = 0;
+        for (const i of q) { if (v[i] === 0) blacks++; else if (v[i] === -1) { nu++; unk = i; } }
+        if (blacks === 4) return false;
+        if (blacks === 3 && nu === 1) {
+          const rr = set(unk, 1, REASON.pool(), unk);
+          if (rr < 0) return false; if (rr === 2) return 'stop'; changed = true;
+        }
+      }
+      if (changed) continue;
+      // C. reachability from numbered islands
+      const reach = new Uint8Array(B.N);
+      const blocked = i => { for (const b of B.nb[i]) if (v[b] === 1) return true; return false; };
+      for (const w of info) {
+        if (!w.clue) continue;
+        w.cells.forEach(i => (reach[i] = 1));
+        const budget = w.clue - w.cells.length;
+        if (budget <= 0) continue;
+        const dist = new Int16Array(B.N).fill(-1), qq = [];
+        w.cells.forEach(i => { dist[i] = 0; qq.push(i); });
+        for (let k = 0; k < qq.length; k++) {
+          const a = qq[k];
+          if (dist[a] >= budget) continue;
+          for (const b of B.nb[a]) {
+            if (dist[b] >= 0 || v[b] === 0) continue;
+            if (v[b] === -1) {
+              // can't step next to another numbered island
+              let bad = false;
+              for (const x of B.nb[b]) if (v[x] === 1 && comp[x] !== comp[w.cells[0]] && info[comp[x]].clue) { bad = true; break; }
+              if (bad) continue;
+            } else if (info[comp[b]].clue) continue;
+            dist[b] = dist[a] + 1; reach[b] = 1; qq.push(b);
+          }
+        }
+      }
+      for (const w of info) if (!w.clue && !w.cells.some(i => reach[i])) return false;
+      for (let i = 0; i < B.N; i++) if (v[i] === -1 && !reach[i]) {
+        const r = set(i, 0, REASON.far(), i);
+        if (r < 0) return false; if (r === 2) return 'stop'; changed = true;
+      }
+      if (changed) continue;
+      // D. islands that must grow through a single exit
+      for (const w of info) {
+        if (w.clue && w.cells.length === w.clue) continue;
+        const exits = new Set();
+        for (const a of w.cells) for (const b of B.nb[a]) if (v[b] === -1) exits.add(b);
+        if (!exits.size) return false;
+        if (exits.size === 1) {
+          const [e] = exits;
+          const r = set(e, 1, w.clue ? REASON.grow(w.clue) : REASON.escape(), w.clue ? w.clueCell : w.cells[0]);
+          if (r < 0) return false; if (r === 2) return 'stop'; changed = true;
+          break;
+        }
+      }
+      if (changed) continue;
+      // E. sea connectivity and counts
+      const bc = blackComps(B, v);
+      let blacks = 0, whites = 0;
+      for (let i = 0; i < B.N; i++) { if (v[i] === 0) blacks++; else if (v[i] === 1) whites++; }
+      if (blacks > B.blackTotal || whites > B.whiteTotal) return false;
+      if (bc.info.length > 1 || blacks < B.blackTotal) {
+        for (const b of bc.info) {
+          const exits = new Set();
+          for (const a of b.cells) for (const x of B.nb[a]) if (v[x] === -1) exits.add(x);
+          if (!exits.size) { if (bc.info.length > 1 || blacks < B.blackTotal) return false; }
+          if (exits.size === 1 && bc.info.length > 1) {
+            const [e] = exits;
+            const r = set(e, 0, REASON.sea(), e);
+            if (r < 0) return false; if (r === 2) return 'stop'; changed = true;
+            break;
+          }
+        }
+      }
+      if (changed) continue;
+      if (blacks === B.blackTotal || whites === B.whiteTotal) {
+        const val = blacks === B.blackTotal ? 1 : 0;
+        for (let i = 0; i < B.N; i++) if (v[i] === -1) {
+          const r = set(i, val, val ? REASON.countB() : REASON.countW(), i);
+          if (r < 0) return false; if (r === 2) return 'stop'; changed = true;
+        }
+      }
+    }
+    return true;
+  }
+  function solvedValid(B, v) {
+    for (let i = 0; i < B.N; i++) if (v[i] === -1) return false;
+    const { info } = whiteComps(B, v);
+    for (const w of info) if (w.clues !== 1 || w.cells.length !== w.clue) return false;
+    const bc = blackComps(B, v);
+    if (bc.info.length > 1) return false;
+    for (let r = 0; r < B.H - 1; r++) for (let c = 0; c < B.W - 1; c++) {
+      const i = r * B.W + c;
+      if (!v[i] && !v[i + 1] && !v[i + B.W] && !v[i + B.W + 1]) return false;
+    }
+    return true;
+  }
+  function count(B, limit, maxNodes) {
+    let n = 0, nodes = 0, sol = null; const sols = [];
+    maxNodes = maxNodes || 20000;
+    const rec = v => {
+      if (n >= limit || nodes > maxNodes) return;
+      nodes++;
+      if (propagate(B, v) === false) return;
+      let pick = -1;
+      for (let i = 0; i < B.N; i++) if (v[i] === -1) {
+        for (const b of B.nb[i]) if (v[b] === 1) { pick = i; break; }
+        if (pick >= 0) break;
+      }
+      if (pick < 0) for (let i = 0; i < B.N; i++) if (v[i] === -1) { pick = i; break; }
+      if (pick < 0) { if (solvedValid(B, v)) { n++; sol = Array.from(v); sols.push(sol); } return; }
+      for (const val of [1, 0]) { const v2 = v.slice(); v2[pick] = val; rec(v2); if (n >= limit) return; }
+    };
+    rec(initial(B));
+    return { count: n, sol, sols, aborted: nodes > maxNodes };
+  }
+  // Difficulty: simple propagation, then proofs by contradiction.
+  function rate(B) {
+    const v = initial(B);
+    if (propagate(B, v) === false) return { level: -1 };
+    const open = () => { let k = 0; for (let i = 0; i < B.N; i++) if (v[i] === -1) k++; return k; };
+    const u0 = open();
+    let look = 0;
+    while (open()) {
+      let progress = false;
+      for (let i = 0; i < B.N && !progress; i++) {
+        if (v[i] !== -1) continue;
+        for (const val of [1, 0]) {
+          const v2 = v.slice(); v2[i] = val;
+          if (propagate(B, v2) === false) {
+            v[i] = 1 - val; look++; progress = true;
+            if (propagate(B, v) === false) return { level: -1 };
+            break;
+          }
+        }
+      }
+      if (!progress) return { level: 2, u0, look, stuck: v };
+    }
+    if (!solvedValid(B, v)) return { level: -1 };
+    return { level: u0 ? 1 : 0, u0, look };
+  }
+  // ---- generator ----
+  function blackConnected(W, H, sol) {
+    const N = W * H; let start = -1, total = 0;
+    for (let i = 0; i < N; i++) if (!sol[i]) { total++; if (start < 0) start = i; }
+    if (!total) return true;
+    const seen = new Uint8Array(N), q = [start]; seen[start] = 1; let k = 0, cnt = 1;
+    while (k < q.length) {
+      const a = q[k++], r = (a / W) | 0, c = a % W;
+      const ns = [];
+      if (r > 0) ns.push(a - W); if (r < H - 1) ns.push(a + W); if (c > 0) ns.push(a - 1); if (c < W - 1) ns.push(a + 1);
+      for (const b of ns) if (!sol[b] && !seen[b]) { seen[b] = 1; cnt++; q.push(b); }
+    }
+    return cnt === total;
+  }
+  function genOnce(L) {
+    const { W, H } = L, N = W * H;
+    const sol = new Int8Array(N), own = new Int32Array(N).fill(-1);
+    const nbs = i => { const r = (i / W) | 0, c = i % W, l = []; if (r > 0) l.push(i - W); if (r < H - 1) l.push(i + W); if (c > 0) l.push(i - 1); if (c < W - 1) l.push(i + 1); return l; };
+    const islands = [];
+    const rnd = n => Math.floor(Math.random() * n);
+    const sizeDraw = () => { const m = L.maxIsl; const a = 1 + rnd(m), b = 1 + rnd(m); return Math.max(1, Math.round((a + b) / 2)); };
+    const canOwn = (i, id) => { if (sol[i]) return false; for (const b of nbs(i)) if (sol[b] && own[b] !== id) return false; return true; };
+    const tryAdd = (i, id) => {
+      sol[i] = 1; own[i] = id;
+      if (!blackConnected(W, H, sol)) { sol[i] = 0; own[i] = -1; return false; }
+      return true;
+    };
+    let fails = 0;
+    while (fails < N * 3) {
+      let white = 0; for (let i = 0; i < N; i++) white += sol[i];
+      if (white / N >= L.white) break;
+      const seed = rnd(N), id = islands.length;
+      if (!canOwn(seed, id) || !tryAdd(seed, id)) { fails++; continue; }
+      const cells = [seed], t = sizeDraw();
+      while (cells.length < t) {
+        const cand = [];
+        for (const a of cells) for (const b of nbs(a)) if (canOwn(b, id) && !cand.includes(b)) cand.push(b);
+        let ok = false;
+        while (cand.length) { const b = cand.splice(rnd(cand.length), 1)[0]; if (tryAdd(b, id)) { cells.push(b); ok = true; break; } }
+        if (!ok) break;
+      }
+      islands.push(cells);
+    }
+    // break 2x2 pools
+    for (let pass = 0; pass < 4; pass++) {
+      let pools = 0;
+      for (let r = 0; r < H - 1; r++) for (let c = 0; c < W - 1; c++) {
+        const q = [r * W + c, r * W + c + 1, (r + 1) * W + c, (r + 1) * W + c + 1];
+        if (q.some(i => sol[i])) continue;
+        pools++;
+        const order = q.slice().sort(() => Math.random() - 0.5);
+        let fixed = false;
+        for (const i of order) {
+          const ids = [...new Set(nbs(i).filter(b => sol[b]).map(b => own[b]))];
+          if (ids.length > 1) continue;
+          if (ids.length === 1) {
+            if (islands[ids[0]].length >= L.maxIsl + 2) continue;
+            if (tryAdd(i, ids[0])) { islands[ids[0]].push(i); fixed = true; break; }
+          } else {
+            const id = islands.length;
+            if (tryAdd(i, id)) { islands.push([i]); fixed = true; break; }
+          }
+        }
+      }
+      if (!pools) break;
+    }
+    for (let r = 0; r < H - 1; r++) for (let c = 0; c < W - 1; c++) {
+      const i = r * W + c;
+      if (!sol[i] && !sol[i + 1] && !sol[i + W] && !sol[i + W + 1]) return null;
+    }
+    const clues = islands.map(cells => { const i = cells[rnd(cells.length)]; return { r: (i / W) | 0, c: i % W, n: cells.length }; });
+    return { W, H, clues, sol: Array.from(sol) };
+  }
+  // Make the grid unique: while another solution exists, change the clues where it disagrees with ours.
+  function repair(g, maxFix) {
+    const { W, H } = g, N = W * H, sol = g.sol.slice();
+    const nbs = i => { const r = (i / W) | 0, c = i % W, l = []; if (r > 0) l.push(i - W); if (r < H - 1) l.push(i + W); if (c > 0) l.push(i - 1); if (c < W - 1) l.push(i + 1); return l; };
+    let clues = g.clues.map(q => ({ ...q }));
+    for (let fix = 0; fix <= maxFix; fix++) {
+      const B = makeBoard(W, H, clues);
+      const c = count(B, 2, 30000);
+      if (c.aborted) return null;
+      if (c.count === 1) return { W, H, clues, sol };
+      if (fix === maxFix) return null;
+      const other = c.sols.find(s => s.some((x, i) => x !== sol[i]));
+      if (!other) return null;
+      // island of each of our white cells
+      const own = new Int32Array(N).fill(-1);
+      clues.forEach((q, k) => {
+        const st = [q.r * W + q.c]; own[st[0]] = k;
+        for (let a = 0; a < st.length; a++) for (const b of nbs(st[a])) if (sol[b] && own[b] < 0) { own[b] = k; st.push(b); }
+      });
+      const opts = [];
+      for (let i = 0; i < N; i++) {
+        if (other[i] === sol[i]) continue;
+        if (sol[i] && !B.clueAt[i]) opts.push(() => { const q = clues[own[i]]; q.r = (i / W) | 0; q.c = i % W; });
+        if (!sol[i] && !nbs(i).some(b => sol[b])) opts.push(() => {
+          sol[i] = 1;
+          if (!blackConnected(W, H, sol)) { sol[i] = 0; return false; }
+          clues.push({ r: (i / W) | 0, c: i % W, n: 1 });
+        });
+      }
+      if (!opts.length) return null;
+      let done = false;
+      for (let k = 0; k < 6 && !done; k++) done = opts[Math.floor(Math.random() * opts.length)]() !== false;
+      if (!done) return null;
+    }
+    return null;
+  }
+  // Make the grid solvable by plain reasoning: where it gets stuck, give a clue right there
+  // (a new island of 1 on a sea cell, or move the clue of an island onto one of its cells).
+  function repairFast(g, maxFix) {
+    const { W, H } = g, N = W * H, sol = g.sol.slice();
+    const nbs = i => { const r = (i / W) | 0, c = i % W, l = []; if (r > 0) l.push(i - W); if (r < H - 1) l.push(i + W); if (c > 0) l.push(i - 1); if (c < W - 1) l.push(i + 1); return l; };
+    const clues = g.clues.map(q => ({ ...q }));
+    for (let fix = 0; fix <= maxFix; fix++) {
+      const B = makeBoard(W, H, clues);
+      const v = initial(B);
+      const r = propagate(B, v);
+      if (r === false) { repairFast.why = 'contra'; return null; }
+      const unk = []; for (let i = 0; i < N; i++) if (v[i] === -1) unk.push(i);
+      if (!unk.length) { if (!solvedValid(B, v)) repairFast.why = 'invalid'; return solvedValid(B, v) ? { W, H, clues, sol, added: g.added || 0 } : null; }
+      // prefer the frontier: unknown cells next to a decided one
+      const front = unk.filter(i => nbs(i).some(b => v[b] !== -1));
+      const pool = front.length ? front : unk;
+      const own = new Int32Array(N).fill(-1);
+      clues.forEach((q, k) => {
+        const st = [q.r * W + q.c]; own[st[0]] = k;
+        for (let a = 0; a < st.length; a++) for (const b of nbs(st[a])) if (sol[b] && own[b] < 0) { own[b] = k; st.push(b); }
+      });
+      let done = false;
+      const blackPool = pool.filter(i => !sol[i]), blackAll = unk.filter(i => !sol[i]);
+      for (let k = 0; k < 60 && !done; k++) {
+        const from = k < 20 && blackPool.length ? blackPool : k < 45 && blackAll.length ? blackAll : unk;
+        const i = from[Math.floor(Math.random() * from.length)];
+        if (sol[i]) {
+          if (B.clueAt[i] || k < 45) continue;
+          const q = clues[own[i]]; q.r = (i / W) | 0; q.c = i % W; done = true;
+          continue;
+        }
+        const ids = [...new Set(nbs(i).filter(b => sol[b]).map(b => own[b]))];
+        if (ids.length === 0) {
+          sol[i] = 1;
+          if (!blackConnected(W, H, sol)) { sol[i] = 0; continue; }
+          clues.push({ r: (i / W) | 0, c: i % W, n: 1 }); done = true;
+        } else if (ids.length === 1 && clues[ids[0]].n < (g.maxIsl || 9) + 3) {
+          // grow the neighbouring island onto this cell, and move its clue here
+          sol[i] = 1;
+          if (!blackConnected(W, H, sol)) { sol[i] = 0; continue; }
+          const q = clues[ids[0]]; q.n += 1;
+          if (Math.random() < 0.5) { q.r = (i / W) | 0; q.c = i % W; }
+          done = true;
+        }
+      }
+      if (!done) { repairFast.why = 'nofix'; return null; }
+    }
+    repairFast.why = 'max'; return null;
+  }
+  // Make it harder: take away given information while the grid stays solvable (with proofs by contradiction allowed).
+  function harden(g, maxTries) {
+    const { W, H } = g, N = W * H;
+    let clues = g.clues.map(q => ({ ...q })), sol = g.sol.slice(), best = null;
+    const nbs = i => { const r = (i / W) | 0, c = i % W, l = []; if (r > 0) l.push(i - W); if (r < H - 1) l.push(i + W); if (c > 0) l.push(i - 1); if (c < W - 1) l.push(i + 1); return l; };
+    const ones = clues.filter(q => q.n === 1).sort(() => Math.random() - 0.5);
+    let rating = rate(makeBoard(W, H, clues));
+    for (const q of ones.slice(0, maxTries)) {
+      const i = q.r * W + q.c;
+      const s2 = sol.slice(); s2[i] = 0;
+      // no 2x2 sea around it
+      let pool = false;
+      const r = q.r, c = q.c;
+      for (const [dr, dc] of [[0, 0], [-1, 0], [0, -1], [-1, -1]]) {
+        const r0 = r + dr, c0 = c + dc;
+        if (r0 < 0 || c0 < 0 || r0 >= H - 1 || c0 >= W - 1) continue;
+        const a = r0 * W + c0;
+        if (!s2[a] && !s2[a + 1] && !s2[a + W] && !s2[a + W + 1]) pool = true;
+      }
+      if (pool) continue;
+      const c2 = clues.filter(x => x !== q);
+      const rt = rate(makeBoard(W, H, c2));
+      if (rt.level === 0 || rt.level === 1) { clues = c2; sol = s2; rating = rt; }
+    }
+    return { W, H, clues, sol, rating };
+  }
+  function generate(L) {
+    const t0 = Date.now();
+    let best = null;
+    for (let a = 0; a < 3000; a++) {
+      if (Date.now() - t0 > 6000 && best) break;
+      const g0 = genOnce(L);
+      if (!g0) continue;
+      g0.maxIsl = L.maxIsl;
+      let g = repairFast(g0, Math.round(g0.W * g0.H / 2));
+      if (!g) continue;
+      if (L.simple) return { ...g, rating: { level: 0, look: 0 } };
+      g = harden(g, L.hardenTries || 12);
+      const look = g.rating.look || 0;
+      if (!L.hard || look >= L.hard.look) return g;
+      if (!best || look > best.rating.look) best = g;
+    }
+    return best || genFallback(L);
+  }
+  function genFallback(L) {      // always ends with a valid (maybe not unique) grid
+    for (;;) { const g = genOnce(L); if (g) return g; }
+  }
+  return { repair, repairFast, harden, makeBoard, initial, propagate, solvedValid, count, rate, generate, whiteComps, blackComps, genOnce };
+})();
+if (typeof module !== 'undefined') module.exports = NuriEngine;
+
+// ---------------------------------------------------------------------------
+// Interface Nurikabe. st.x : 0 inconnu, 1 mer (noircie), 2 terre (point).
+// ---------------------------------------------------------------------------
+(function () {
+  if (typeof registerGame === 'undefined') return;
+  const E = NuriEngine;
+  let B = null, paint = null;
+  const LV = {
+    facile:    { W: 6, H: 6, maxIsl: 4, white: .45, simple: true, label: 'Facile',    kanji: '易' },
+    moyen:     { W: 7, H: 7, maxIsl: 5, white: .45, simple: true, label: 'Moyen',     kanji: '中' },
+    difficile: { W: 8, H: 8, maxIsl: 6, white: .45, simple: true, label: 'Difficile', kanji: '難' },
+    expert:    { W: 9, H: 9, maxIsl: 6, white: .45, simple: true, label: 'Expert',    kanji: '極' },
+    maitre:    { W: 9, H: 9, maxIsl: 8, white: .44, label: 'Maître', kanji: '鬼', sizeLabel: '9×9 · grandes îles' }
+  };
+  const customLevel = (W, H, hard) => ({ W, H, maxIsl: hard ? 8 : 5, white: .45, simple: !hard, label: 'Personnalisé', kanji: '自' });
+  function known(s) {
+    const v = E.initial(B);
+    for (let i = 0; i < B.N; i++) {
+      if (B.clueAt[i]) continue;
+      if (s.x[i] === 1 && !s.sol[i]) v[i] = 0;
+      else if (s.x[i] === 2 && s.sol[i]) v[i] = 1;
+    }
+    return v;
+  }
+  function findHint(s) {
+    for (let i = 0; i < B.N; i++) {
+      if (B.clueAt[i]) continue;
+      if (s.x[i] === 1 && s.sol[i]) return { type: 'wrong', i, val: 1, text: 'Cette case fait partie d\'une île : elle ne doit pas être de la mer.' };
+      if (s.x[i] === 2 && !s.sol[i]) return { type: 'wrong', i, val: 0, text: 'Cette case est de la mer, pas de la terre.' };
+    }
+    let found = null;
+    // sea first (that's what the player paints), land marks second
+    for (const want of [0, 1]) {
+      const v = known(s);
+      E.propagate(B, v, (i, val, why, focus) => {
+        if (val !== want) return false;
+        if ((val === 0 && s.x[i] === 1) || (val === 1 && s.x[i] === 2)) return false;
+        found = { i, val, text: why + (val === 1 ? ' Marque-la d\'un point.' : ''), focus }; return true;
+      });
+      if (found) break;
+    }
+    if (!found) {
+      const v = known(s); E.propagate(B, v);
+      for (let i = 0; i < B.N && !found; i++) {
+        if (v[i] !== -1) continue;
+        for (const val of [1, 0]) {
+          const v2 = v.slice(); v2[i] = val;
+          if (E.propagate(B, v2) === false) {
+            found = { i, val: 1 - val, focus: i, text: val === 1
+              ? 'Raisonnement par l\'absurde : si cette case était de la terre, une île deviendrait impossible (trop grande, soudée à une autre ou coupant la mer). C\'est donc de la mer.'
+              : 'Raisonnement par l\'absurde : si cette case était de la mer, la mer formerait un bloc 2×2 ou une île ne pourrait plus atteindre sa taille. C\'est donc de la terre.' };
+            break;
+          }
+        }
+      }
+    }
+    if (!found) for (let i = 0; i < B.N; i++) if (!B.clueAt[i] && !s.sol[i] && s.x[i] !== 1) { found = { i, val: 0, focus: i, text: 'Déduction avancée : cette case est de la mer.' }; break; }
+    return found;
+  }
+  registerGame({
+    id: 'nurikabe', name: 'Nurikabe', kanji: '塗', winText: 'Mer et îles tracées',
+    levels: LV, customLevel, customDefault: { W: 8, H: 8, hard: false }, customRange: { W: [5, 9], H: [5, 9] },
+    customInfo: (W, H, hard) => `${W * H} cases · ${hard ? 'grandes îles' : 'îles moyennes'}`,
+    rules: `<h3 style="margin-top:0">Nurikabe 塗 : les règles</h3><ul>
+      <li>Chaque nombre est une <b>île</b> : il donne le nombre de cases de terre de cette île (le nombre compris).</li>
+      <li>Chaque île contient <b>un seul nombre</b>, et deux îles ne se touchent jamais par un côté.</li>
+      <li>Toutes les autres cases sont de la <b>mer</b>, qui forme <b>un seul bloc</b> relié.</li>
+      <li>La mer ne contient <b>aucun carré 2×2</b>.</li></ul>
+      <h3>Commandes</h3><ul>
+      <li>Touche une case : <b>mer</b>, puis <b>terre</b> (·), puis vide.</li>
+      <li>Glisse le doigt pour peindre plusieurs cases de la même façon.</li></ul>`,
+    valid: s => !!s.clues && !!s.sol,
+    generate: L => { const g = E.generate(L); return { W: g.W, H: g.H, clues: g.clues, sol: g.sol }; },
+    emptyX: s => s.sol.map(() => 0),
+    prepare: s => { B = E.makeBoard(s.W, s.H, s.clues); },
+    progress: s => { let p = 0; for (let i = 0; i < B.N; i++) if (!B.clueAt[i] && ((s.x[i] === 1 && !s.sol[i]) || (s.x[i] === 2 && s.sol[i]))) p++; return p; },
+    check: s => {
+      const v = new Int8Array(B.N);
+      for (let i = 0; i < B.N; i++) v[i] = B.clueAt[i] ? 1 : (s.x[i] === 1 ? 0 : 1);
+      let blacks = 0; for (let i = 0; i < B.N; i++) if (!v[i]) blacks++;
+      if (blacks !== B.blackTotal) return false;
+      return E.solvedValid(B, v) ? true : false;
+    },
+    wrong: s => { const b = new Set(); for (let i = 0; i < B.N; i++) if (!B.clueAt[i] && ((s.x[i] === 1 && s.sol[i]) || (s.x[i] === 2 && !s.sol[i]))) b.add(i); return b; },
+    wrongText: n => `${plural(n, 'case')} incorrecte${n > 1 ? 's' : ''}, en rouge.`,
+    findHint: s => {
+      const h = findHint(s);
+      if (!h) return null;
+      const f = h.focus !== undefined ? h.focus : h.i;
+      h.r = (f / s.W) | 0; h.c = f % s.W;
+      h.focusText = B.clueAt[f] ? `Regarde cette île de ${B.clueAt[f]}.` : 'Regarde cette case et ce qui l\'entoure.';
+      h.apply = st => { st.x[h.i] = h.val === 0 ? 1 : 2; };
+      return h;
+    },
+    render: (s, ctx) => {
+      const out = [], W = s.W, H = s.H, h = ctx.hint;
+      for (let i = 0; i < B.N; i++) {
+        const r = (i / W) | 0, c = i % W, x = c * S, y = r * S;
+        const bad = ctx.flash && ctx.flash.has(i);
+        if (!B.clueAt[i] && s.x[i] === 1) out.push(`<rect class="nk-sea${bad ? ' bad' : ''}" x="${x + 1.5}" y="${y + 1.5}" width="${S - 3}" height="${S - 3}" rx="4"/>`);
+      }
+      for (let r = 0; r <= H; r++) out.push(`<line class="gl" x1="0" y1="${r * S}" x2="${W * S}" y2="${r * S}"/>`);
+      for (let c = 0; c <= W; c++) out.push(`<line class="gl" x1="${c * S}" y1="0" x2="${c * S}" y2="${H * S}"/>`);
+      // complete islands: closed by sea or edges, right size
+      const v = new Int8Array(B.N); for (let i = 0; i < B.N; i++) v[i] = B.clueAt[i] || s.x[i] === 2 ? 1 : (s.x[i] === 1 ? 0 : -1);
+      const { info } = E.whiteComps(B, v);
+      const complete = new Set();
+      for (const w of info) if (w.clue && w.cells.length === w.clue && w.cells.every(a => B.nb[a].every(b => v[b] !== -1))) complete.add(w.clueCell);
+      for (let i = 0; i < B.N; i++) {
+        const r = (i / W) | 0, c = i % W, cx = c * S + S / 2, cy = r * S + S / 2;
+        const bad = ctx.flash && ctx.flash.has(i);
+        if (B.clueAt[i]) out.push(`<g class="nk-isl${complete.has(i) ? ' full' : ''}"><circle cx="${cx}" cy="${cy}" r="21"/><text x="${cx}" y="${cy + 9}">${B.clueAt[i]}</text></g>`);
+        else if (s.x[i] === 2) out.push(`<circle class="nk-dot${bad ? ' bad' : ''}" cx="${cx}" cy="${cy}" r="5"/>`);
+      }
+      if (h && h.level >= 2) {
+        const f = h.focus !== undefined ? h.focus : h.i, fr = (f / W) | 0, fc = f % W;
+        out.push(`<rect class="hcell" x="${fc * S + 3}" y="${fr * S + 3}" width="${S - 6}" height="${S - 6}" rx="5"/>`);
+      }
+      if (h && h.level >= 3) {
+        const r = (h.i / W) | 0, c = h.i % W;
+        out.push(h.val === 0 && h.type !== 'wrong' ? `<rect class="nk-ghost" x="${c * S + 6}" y="${r * S + 6}" width="${S - 12}" height="${S - 12}" rx="4"/>` : `<rect class="hcell" x="${c * S + 3}" y="${r * S + 3}" width="${S - 6}" height="${S - 6}" rx="5"/>`);
+      }
+      return out.join('');
+    },
+    pointerDown: (s, pt) => {
+      const cell = cellAt(pt);
+      if (!cell) return { pan: true };
+      const i = cell.r * s.W + cell.c;
+      if (B.clueAt[i]) return { pan: true };
+      const from = s.x[i], to = (from + 1) % 3;
+      beginStroke();
+      s.x[i] = to;
+      paint = { from, to, done: new Set([i]) };
+      strokeChanged();
+      return { pan: false };
+    },
+    pointerMove: (s, g, pt) => {
+      if (!paint) return;
+      const cell = cellAt(pt);
+      if (!cell) return;
+      const i = cell.r * s.W + cell.c;
+      if (paint.done.has(i) || B.clueAt[i] || s.x[i] !== paint.from) return;
+      paint.done.add(i); s.x[i] = paint.to; strokeChanged();
+    },
+    pointerUp: () => { if (paint) { paint = null; endStroke(true); } },
+    pointerCancel: () => { if (paint) { paint = null; endStroke(true); } }
+  });
+})();
+
+
+(function () {
+  try {
+    var A = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+    if (!A) return;
+    A.addListener('backButton', function () {
+      var r = document.getElementById('rules');
+      if (r.classList.contains('on')) { r.classList.remove('on'); return; }
+      if (typeof hint !== 'undefined' && hint) { hint = null; showHintText(''); render(); return; }
+      if (inGame) { backFromGame(); return; }
+      A.minimizeApp();
+    });
+    A.addListener('pause', function () { try { save(); } catch (e) {} });
+  } catch (e) {}
+})();
+
+init();
+
+</script>
+</body>
+</html>

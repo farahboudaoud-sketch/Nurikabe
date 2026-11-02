@@ -1,0 +1,14 @@
+{
+  "appId": "fr.nurikabe.jeu",
+  "appName": "Nurikabe",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#060c1a"
+  },
+  "plugins": {
+    "SystemBars": {
+      "style": "DARK",
+      "insetsHandling": "css"
+    }
+  }
+}

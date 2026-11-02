@@ -1,0 +1,13 @@
+{
+  "id": "nurikabe",
+  "name": "Nurikabe",
+  "kanji": "塗",
+  "tagline": "Peindre la mer autour des îles",
+  "introArt": "<rect class=\"ic\" x=\"105\" y=\"50\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.00s;stroke-width:1.5\"/><rect class=\"ic\" x=\"135\" y=\"50\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.05s;stroke-width:1.5\"/><rect class=\"ic\" x=\"165\" y=\"50\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.10s;stroke-width:1.5\"/><rect class=\"ic\" x=\"105\" y=\"80\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.15s;stroke-width:1.5\"/><rect class=\"ic\" x=\"135\" y=\"80\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.20s;stroke-width:1.5\"/><rect class=\"ic\" x=\"165\" y=\"80\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.25s;stroke-width:1.5\"/><rect class=\"ic\" x=\"105\" y=\"110\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.30s;stroke-width:1.5\"/><rect class=\"ic\" x=\"135\" y=\"110\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.35s;stroke-width:1.5\"/><rect class=\"ic\" x=\"165\" y=\"110\" width=\"30\" height=\"30\" pathLength=\"1\" style=\"animation-delay:0.40s;stroke-width:1.5\"/><rect x=\"106.5\" y=\"51.5\" width=\"27\" height=\"27\" rx=\"3\" style=\"fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.50s forwards\"/><rect x=\"166.5\" y=\"51.5\" width=\"27\" height=\"27\" rx=\"3\" style=\"fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.58s forwards\"/><circle cx=\"120\" cy=\"95\" r=\"11\" style=\"fill:var(--navy2);stroke:var(--ink);stroke-width:2\"/><text x=\"120\" y=\"100\" style=\"fill:var(--ink);font-family:Chiffres,sans-serif;font-size:14px;font-weight:700;text-anchor:middle\">3</text><rect x=\"166.5\" y=\"81.5\" width=\"27\" height=\"27\" rx=\"3\" style=\"fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.66s forwards\"/><rect x=\"106.5\" y=\"111.5\" width=\"27\" height=\"27\" rx=\"3\" style=\"fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.74s forwards\"/><rect x=\"136.5\" y=\"111.5\" width=\"27\" height=\"27\" rx=\"3\" style=\"fill:var(--ink);opacity:0;animation:fade .2s ease-out 0.82s forwards\"/><circle cx=\"180\" cy=\"125\" r=\"11\" style=\"fill:var(--navy2);stroke:var(--ink);stroke-width:2\"/><text x=\"180\" y=\"130\" style=\"fill:var(--ink);font-family:Chiffres,sans-serif;font-size:14px;font-weight:700;text-anchor:middle\">1</text>",
+  "scripts": [
+    "nurikabe-engine.js"
+  ],
+  "css": [
+    "nurikabe.css"
+  ]
+}

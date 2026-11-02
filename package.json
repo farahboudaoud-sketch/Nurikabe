@@ -1,0 +1,21 @@
+{
+  "name": "nurikabe",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nurikabe \u2013 Peindre la mer autour des \u00eeles",
+  "scripts": {
+    "sync": "cap sync android",
+    "build": "python3 src/build.py"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.0",
+    "@fontsource/shippori-mincho": "^5.0.0",
+    "@fontsource/zen-kaku-gothic-new": "^5.0.0"
+  }
+}
